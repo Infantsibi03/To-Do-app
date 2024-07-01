@@ -1,0 +1,108 @@
+.App {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  padding: 20px;
+  margin-bottom: 50px;
+}
+
+h1 {
+  background-color: #f5ba13;
+  padding: 20px;
+  color: black;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.AddNote {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  padding: 10px 15px;
+  margin-bottom: 10px;
+}
+
+.AddNote input,
+.AddNote .editInput {
+  padding: 10px;
+  width: 300px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.AddNote input:focus,
+.AddNote .editInput:focus {
+  border-color: white;
+}
+
+.AddNote img.submitIcon,
+.AddNote img.deletIcon {
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  margin-left: 10px;
+  transition: transform 0.3s;
+}
+
+.AddNote img.submitIcon:hover,
+.AddNote img.deletIcon:hover {
+  transform: scale(1.2);
+}
+/* .AddNote img.deletIcon:hover {
+  transform: scale(1.2);
+} */
+.NotesList {
+  margin-top: 20px;
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.Note {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  padding: 15px;
+  width: 100%;
+  margin-bottom: 10px;
+  text-align: left;
+  font-size: 16px;
+  color: #333;
+}
+
+.Note h1 {
+  cursor: pointer;
+  margin: 0 0 10px 0;
+  font-size: 20px;
+  color: #555;
+  transition: transform 0.1s;
+}
+
+.Note h1:hover {
+  transform: scale(1.1);
+}
+
+.Note p:hover {
+  margin: 10;
+  display: contents;
+  cursor: pointer;
+  margin: 0 0 10px 0;
+  font-size: 20px;
+  color: #555;
+}
+
+.Note p:hover {
+  transform: scale(1.3);
+}
