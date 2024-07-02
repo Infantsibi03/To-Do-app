@@ -7,25 +7,31 @@ import submitIcon from "./submit.svg";
 // console.log(uuidv4());
 const App = () => {
   const [content, setContent] = useState("");
-  const [notes, setNotes] = useState([]);
+  const [notes, setNotes] = useState(
+    JSON.parse(window.localStorage.getItem("Notes"))
+  );
 
   const addNote = () => {
     if (content.trim() !== "") {
-      setNotes([...notes, { id: uuidv4(), content }]);
+      var newNotes = [...notes, { id: uuidv4(), content }];
+      setNotes(newNotes);
       setContent("");
+      window.localStorage.setItem("Notes", JSON.stringify(newNotes));
     }
   };
 
   const updateNoteContent = (noteToUpdateID, newContent) => {
-    setNotes(
-      notes.map((note) =>
-        note.id === noteToUpdateID ? { ...note, content: newContent } : note
-      )
+    var newNotes = notes.map((note) =>
+      note.id === noteToUpdateID ? { ...note, content: newContent } : note
     );
+    setNotes(newNotes);
+    window.localStorage.setItem("Notes", JSON.stringify(newNotes));
   };
 
   const deleteNote = (noteToDeleteID) => {
-    setNotes(notes.filter((note) => note.id !== noteToDeleteID));
+    var newNotes = notes.filter((note) => note.id !== noteToDeleteID);
+    setNotes(newNotes);
+    window.localStorage.setItem("Notes", JSON.stringify(newNotes));
   };
 
   return (

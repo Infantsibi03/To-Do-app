@@ -18,7 +18,7 @@ const Note = ({ note, updateNoteContent, deleteNote }) => {
     updateNoteContent(note.id, editContent);
     setIsEdit(false);
   };
-  console.log("the note is" + note);
+
   const handleDeleteClick = () => {
     deleteNote(note.id);
   };
