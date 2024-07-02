@@ -15,22 +15,25 @@ const Note = ({ note, updateNoteContent, deleteNote }) => {
   };
 
   const handleSaveClick = () => {
-    updateNoteContent(note, editContent);
+    updateNoteContent(note.id, editContent);
     setIsEdit(false);
   };
+  console.log("the note is" + note);
   const handleDeleteClick = () => {
-    deleteNote(note);
+    deleteNote(note.id);
   };
 
   return (
     <div className="Note">
       {isEdit ? (
         <div className="AddNote">
-          <input
+          <textarea
+            className="editInputArea"
             type="text"
             value={editContent}
             onChange={(e) => setEditContent(e.target.value)}
-            className="editInput"
+            rows="4"
+            cols="50"
           />
           <img
             className="submitIcon"
@@ -47,7 +50,9 @@ const Note = ({ note, updateNoteContent, deleteNote }) => {
         </div>
       ) : (
         <div>
-          <h1 onClick={handleEditClick}>{note.content}</h1>
+          <h1 className="savedNote" onClick={handleEditClick}>
+            {note.content}
+          </h1>
         </div>
       )}
     </div>

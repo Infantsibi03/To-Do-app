@@ -1,37 +1,43 @@
 import React, { useState } from "react";
 import Note from "./Note";
+import { v4 as uuidv4 } from "uuid";
 import "./App.css";
 import submitIcon from "./submit.svg";
 
+// console.log(uuidv4());
 const App = () => {
   const [content, setContent] = useState("");
   const [notes, setNotes] = useState([]);
 
   const addNote = () => {
     if (content.trim() !== "") {
-      setNotes([...notes, { content }]);
+      setNotes([...notes, { id: uuidv4(), content }]);
       setContent("");
     }
   };
 
-  const updateNoteContent = (noteToUpdate, newContent) => {
+  const updateNoteContent = (noteToUpdateID, newContent) => {
     setNotes(
       notes.map((note) =>
-        note === noteToUpdate ? { ...note, content: newContent } : note
+        note.id === noteToUpdateID ? { ...note, content: newContent } : note
       )
     );
   };
-  const deleteNote = (noteToDelete) => {
-    setNotes(notes.filter((note) => note !== noteToDelete));
+
+  const deleteNote = (noteToDeleteID) => {
+    setNotes(notes.filter((note) => note.id !== noteToDeleteID));
   };
+
   return (
     <div className="App">
-      <h1>TO-DO</h1>
+      <h1 className="Heading">TO-DO</h1>
       <div className="AddNote">
-        <input
+        <textarea
           placeholder="Take a Note...."
           value={content}
           onChange={(e) => setContent(e.target.value)}
+          rows="4"
+          cols="50"
         />
         <img
           className="submitIcon"
@@ -41,9 +47,9 @@ const App = () => {
         />
       </div>
       <div className="NotesList">
-        {notes.map((note, index) => (
+        {notes.map((note) => (
           <Note
-            key={index}
+            key={note.id}
             note={note}
             updateNoteContent={updateNoteContent}
             deleteNote={deleteNote}
