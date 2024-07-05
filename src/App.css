@@ -87,9 +87,9 @@
   margin: 0 0 10px 0;
   font-size: 20px;
   color: #555;
-  transition: transform 0.1s;
+  transition: transform 0.2s;
 }
 
 .savedNote:hover {
-  transform: scale(1.1);
+  transform: scale(1.4);
 }

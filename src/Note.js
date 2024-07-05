@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import submitIcon from "./submit.svg";
 import deletIcon from "./delete.svg";
 
-const Note = ({ note, updateNoteContent, deleteNote }) => {
+const Note = ({ note, handleUpdateNoteContent, handleDeleteNote }) => {
   const [isEdit, setIsEdit] = useState(false);
   const [editContent, setEditContent] = useState(note.content);
 
@@ -15,12 +15,12 @@ const Note = ({ note, updateNoteContent, deleteNote }) => {
   };
 
   const handleSaveClick = () => {
-    updateNoteContent(note.id, editContent);
+    handleUpdateNoteContent(note.id, editContent);
     setIsEdit(false);
   };
 
   const handleDeleteClick = () => {
-    deleteNote(note.id);
+    handleDeleteNote(note.id);
   };
 
   return (

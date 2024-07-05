@@ -1,37 +1,41 @@
 import React, { useState } from "react";
 import Note from "./Note";
-import { v4 as uuidv4 } from "uuid";
+import { useSelector, useDispatch } from "react-redux";
+import { addNote, updateNoteContent, deleteNote } from "./Redux/notesSlice.js";
 import "./App.css";
 import submitIcon from "./submit.svg";
 
-// console.log(uuidv4());
 const App = () => {
   const [content, setContent] = useState("");
-  const [notes, setNotes] = useState(
-    JSON.parse(window.localStorage.getItem("Notes"))
-  );
+  const notes = useSelector((state) => state.notes.notes);
+  const dispatch = useDispatch();
 
-  const addNote = () => {
+  const hanldeAddNote = () => {
     if (content.trim() !== "") {
-      var newNotes = [...notes, { id: uuidv4(), content }];
-      setNotes(newNotes);
+      dispatch(
+        addNote({
+          content,
+        })
+      );
       setContent("");
-      window.localStorage.setItem("Notes", JSON.stringify(newNotes));
     }
   };
 
-  const updateNoteContent = (noteToUpdateID, newContent) => {
-    var newNotes = notes.map((note) =>
-      note.id === noteToUpdateID ? { ...note, content: newContent } : note
+  const handleUpdateNoteContent = (noteToUpdateID, newContent) => {
+    dispatch(
+      updateNoteContent({
+        noteToUpdateID,
+        newContent,
+      })
     );
-    setNotes(newNotes);
-    window.localStorage.setItem("Notes", JSON.stringify(newNotes));
   };
 
-  const deleteNote = (noteToDeleteID) => {
-    var newNotes = notes.filter((note) => note.id !== noteToDeleteID);
-    setNotes(newNotes);
-    window.localStorage.setItem("Notes", JSON.stringify(newNotes));
+  const handleDeleteNote = (noteToDeleteID) => {
+    dispatch(
+      deleteNote({
+        noteToDeleteID,
+      })
+    );
   };
 
   return (
@@ -49,7 +53,7 @@ const App = () => {
           className="submitIcon"
           src={submitIcon}
           alt="submit"
-          onClick={addNote}
+          onClick={hanldeAddNote}
         />
       </div>
       <div className="NotesList">
@@ -57,8 +61,8 @@ const App = () => {
           <Note
             key={note.id}
             note={note}
-            updateNoteContent={updateNoteContent}
-            deleteNote={deleteNote}
+            handleUpdateNoteContent={handleUpdateNoteContent}
+            handleDeleteNote={handleDeleteNote}
           />
         ))}
       </div>
